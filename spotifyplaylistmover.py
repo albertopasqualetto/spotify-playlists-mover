@@ -7,9 +7,9 @@ import requests
 # from pprint import pprint
 
 print("Origin account")
-spFrom= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/"))
+spFrom= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/", scope="user-library-read"))
 print("Destination account")
-spTo= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload"))
+spTo= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
 
 # print(spFrom.me())
 
@@ -41,3 +41,15 @@ for playlist in playlists:
 	for track in playlistTracks:
 		trackList.append(track['id'])
 	spTo.playlist_add_item(newPlaylist['id'], trackList)
+
+
+# Saved tracks
+result= spFrom.current_user_saved_tracks()
+savedTracks= result['items']
+while result['next']:
+	result= spFrom.next(result)
+	savedTracks.extend(result['items'])
+savedTracksList= []
+for savedTrack in savedTracks:
+	savedTracksList.append(savedTrack['track']['id'])
+spTo.current_user_saved_tracks_add(savedTracksList)

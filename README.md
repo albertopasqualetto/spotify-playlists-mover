@@ -1,3 +1,3 @@
 # SpotifyPlaylistsMover
 
-This will transfer all your Spotify playlists to a new account
+This will transfer all your Spotify playlists and saved tracks to a new account
