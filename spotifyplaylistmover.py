@@ -1,3 +1,5 @@
+# TODO track add number limit?
+
 import spotipy
 from spotipy.oauth2 import SpotifyImplicitGrant
 import base64
@@ -11,10 +13,17 @@ spTo= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d4
 
 # print(spFrom.me())
 
-playlists=(spFrom.current_user_playlists())	# dict output -> list playlists -> dict playlist
+# pprint(spFrom.current_user_playlists())
+
+# Playlists
+result= (spFrom.current_user_playlists())	# dict output -> list playlists -> dict playlist
+playlists= result['items']
+while result['next']:	# pages after first
+	result= spFrom.next(result)
+	playlists.extend(result['items'])
 # print(playlists['items'][n]['id'])
 
-for playlist in playlists['items']:
+for playlist in playlists:
 	# Create playlist
 	newPlaylist= spTo.user_playlist_create(spTo.me()['id'], playlist['name'], public= playlist['public'], collaborative= playlist['collaborative'], description= playlist['description'])
 
@@ -23,8 +32,12 @@ for playlist in playlists['items']:
 	spTo.playlist_upload_cover_image(newPlaylist['id'], thumbnail_b64)
 
 	# Set tracks
-	playlistTracks= spFrom.playlist_tracks(playlist)
+	result= spFrom.playlist_tracks(playlist)
+	playlistTracks= result['items']
+	while result['next']:
+		result= spFrom.next(result)
+		playlistTracks.extend(result['items'])
 	trackList= []
-	for track in playlistTracks['items']:
+	for track in playlistTracks:
 		trackList.append(track['id'])
 	spTo.playlist_add_item(newPlaylist['id'], trackList)
