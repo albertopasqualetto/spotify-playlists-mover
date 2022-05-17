@@ -6,9 +6,9 @@ import base64
 import requests
 # from pprint import pprint
 
-print("Origin account")
+print("Login to Origin account")
 spFrom= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/", scope="user-library-read"))
-print("Destination account")
+print("Log in to Destination account")
 spTo= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d43b690e00e8594579a63", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
 
 # print(spFrom.me())
@@ -16,6 +16,7 @@ spTo= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="86d6f354226d4
 # pprint(spFrom.current_user_playlists())
 
 # Playlists
+print("Copying playlists...")
 result= (spFrom.current_user_playlists())	# dict output -> list playlists -> dict playlist
 playlists= result['items']
 while result['next']:	# pages after first
@@ -44,6 +45,7 @@ for playlist in playlists:
 
 
 # Saved tracks
+print("Copying saved tracks...")
 result= spFrom.current_user_saved_tracks()
 savedTracks= result['items']
 while result['next']:
@@ -53,3 +55,6 @@ savedTracksList= []
 for savedTrack in savedTracks:
 	savedTracksList.append(savedTrack['track']['id'])
 spTo.current_user_saved_tracks_add(savedTracksList)
+
+
+print("Done")
