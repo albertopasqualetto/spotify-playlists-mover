@@ -11,7 +11,7 @@ import requests
 def download_from_origin():
 	print("Login to Origin account")
 	sp_from= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="user-library-read"))
-	print(sp_from.me()['id'])
+	print("\n\nOrigin account:", sp_from.me()['display_name'])
 
 	# Playlists
 	print("Downloading playlists...")
@@ -56,7 +56,7 @@ def upload_to_destination(playlists_dict_and_saved_tracks_list_tuple):
 
 	print("Log in to Destination account")
 	sp_to= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
-	print(sp_to.me()['id'])
+	print("\n\nDestination account:", sp_to.me()['display_name'])
 
 	# Playlists
 	print("Uploading playlists...")
@@ -74,11 +74,20 @@ def upload_to_destination(playlists_dict_and_saved_tracks_list_tuple):
 					print("Error uploading thumbnail of \"" + playlist['name'] + "\" playlist; skipping...")
 
 			# Set tracks
-			sp_to.playlist_add_items(new_playlist['id'], playlist['track_list'])
+			list_49= split_every_49(playlist['track_list'])	# You can add a maximum of 100 tracks per request
+			for chunk in list_49:
+				sp_to.playlist_add_items(new_playlist['id'], chunk)
 		else:
 			print("Playlist \"" + playlist['name'] + "\" has no tracks; skipping...")
 
 
 	# Saved tracks
 	print("Uploading saved tracks...")
-	sp_to.current_user_saved_tracks_add(saved_tracks_list)
+	list_49= split_every_49(saved_tracks_list)	# You can add a maximum of 50 tracks per request
+	for chunk in list_49:
+		sp_to.current_user_saved_tracks_add(chunk)
+
+
+
+def split_every_49(list):
+	return [list[i:i + 49] for i in range(0, len(list), 49)]
