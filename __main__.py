@@ -1,14 +1,14 @@
 import sys
-import spotifyplaylistmover
+import spotify_playlist_mover
 import webbrowser
 import time
 
 
 def main():
 	spotify_logout()
-	old_account_dl= spotifyplaylistmover.download_from_origin()
+	old_account_dl= spotify_playlist_mover.download_from_origin()
 	spotify_logout()
-	spotifyplaylistmover.upload_to_destination(old_account_dl)
+	spotify_playlist_mover.upload_to_destination(old_account_dl)
 	print("Done!")
 
 def spotify_logout():
