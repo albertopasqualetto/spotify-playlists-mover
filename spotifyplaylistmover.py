@@ -1,5 +1,3 @@
-# TODO track add number limit?
-
 import spotipy
 from spotipy.oauth2 import SpotifyImplicitGrant
 import base64
