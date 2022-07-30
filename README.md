@@ -2,7 +2,7 @@
 
 This will transfer all your Spotify playlists and saved tracks to a new account
 
-**IMPORTANT: AT THIS MOMENT THE CLIENT ID IS MY ONE, IF YOU WANT TO USE THIS PROGRAM YOU HAVE TO CHANGE IT IN THE CODE WITH YOURS FOUND ON [DEVELOPER DASHBOARD](https://developer.spotify.com/dashboard) BY CREATING A NEW APPLICATION**
+**IMPORTANT: IF YOU WANT TO USE THIS PROGRAM YOU HAVE TO GET YOUR [CLIENT ID](#how-to-get-a-client-id)**
 
 
 ## How to use
@@ -10,8 +10,15 @@ This will transfer all your Spotify playlists and saved tracks to a new account
 1. Download and extract or clone repo.
 2. Run: `pip install -r requirements.txt`
 3. Open repo folder
-4. From folder run: `python .` (to run all the code in the folder, or run `python __main__.py`)
-5. The program will let you login your origin account
-6. Then it will logout from origin account
-7. It will let you login your destination account
-8. Done!
+4. Set your client ID as environment variable: `export SPOTIPY_CLIENT_ID=<your client ID>`
+5. From folder run: `python .` (to run all the code in the folder, or run `python __main__.py`)
+6. The program will let you login your origin account
+7. Then it will logout from origin account
+8. It will let you login your destination account
+9. Done!
+
+## How to get a client id
+
+1. Go to [Developer dashboard](https://developer.spotify.com/dashboard)
+2. Create a new application
+3. Set `redirect_uri` to `http://localhost/`

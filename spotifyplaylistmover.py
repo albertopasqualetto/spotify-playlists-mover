@@ -6,11 +6,13 @@ import base64
 import requests
 # from pprint import pprint
 
+CLIENT_ID= ""
+REDIRECT_URI= "http://localhost/"
 
 
 def download_from_origin():
 	print("Login to Origin account")
-	sp_from= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="user-library-read"))
+	sp_from= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id=CLIENT_ID, redirect_uri=REDIRECT_URI, scope="user-library-read"))
 	print("\n\nOrigin account:", sp_from.me()['display_name'])
 
 	# Playlists
@@ -55,7 +57,7 @@ def upload_to_destination(playlists_dict_and_saved_tracks_list_tuple):
 	saved_tracks_list= playlists_dict_and_saved_tracks_list_tuple[1]
 
 	print("Log in to Destination account")
-	sp_to= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
+	sp_to= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id=CLIENT_ID, redirect_uri=REDIRECT_URI, scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
 	print("\n\nDestination account:", sp_to.me()['display_name'])
 
 	# Playlists
