@@ -8,11 +8,10 @@ This will transfer all your Spotify playlists and saved tracks to a new account
 ## How to use
 
 1. Download and extract or clone repo.
-2. **Logout from Spotify**
-3. Run: `pip install -r requirements.txt`
-4. Open repo folder
-5. From folder run: `python .` (to run all the code in the folder)
-6. The program will let you login your origin account
-7. Then it will logout
-8. Finally it will lett you login yout destination account
-9. Done!
+2. Run: `pip install -r requirements.txt`
+3. Open repo folder
+4. From folder run: `python .` (to run all the code in the folder, or run `python __main__.py`)
+5. The program will let you login your origin account
+6. Then it will logout from origin account
+7. It will let you login your destination account
+8. Done!
