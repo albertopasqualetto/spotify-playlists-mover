@@ -4,14 +4,14 @@ import spotipy
 from spotipy.oauth2 import SpotifyImplicitGrant
 import base64
 import requests
-from pprint import pprint
+# from pprint import pprint
 
 
 
 def download_from_origin():
 	print("Login to Origin account")
 	sp_from= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="user-library-read"))
-	print(sp_from.me())
+	print(sp_from.me()['id'])
 
 	# Playlists
 	print("Downloading playlists...")
@@ -56,7 +56,7 @@ def upload_to_destination(playlists_dict_and_saved_tracks_list_tuple):
 
 	print("Log in to Destination account")
 	sp_to= spotipy.Spotify(auth_manager=SpotifyImplicitGrant(client_id="f22a36cd6eed407f88ce13a771388461", redirect_uri="http://localhost/", scope="playlist-modify-public playlist-modify-private ugc-image-upload user-library-modify"))
-	print(sp_to.me())
+	print(sp_to.me()['id'])
 
 	# Playlists
 	print("Uploading playlists...")
