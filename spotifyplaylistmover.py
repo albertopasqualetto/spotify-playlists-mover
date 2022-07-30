@@ -24,7 +24,7 @@ def download_from_origin():
 	# pprint(playlists)
 
 	for playlist in playlists:
-		# playlist dictionary playlist:[trackList]
+		# playlist dictionary playlist:[track_list]
 		result= sp_from.playlist_tracks(playlist)
 		playlist_tracks= result['items']
 		while result['next']:
@@ -33,7 +33,7 @@ def download_from_origin():
 		track_list= []
 		for track in playlist_tracks:
 			track_list.append(track['track']['uri'])
-		playlist['trackList']= track_list
+		playlist['track_list']= track_list
 
 
 	# Saved tracks
@@ -61,18 +61,22 @@ def upload_to_destination(playlists_dict_and_saved_tracks_list_tuple):
 	# Playlists
 	print("Uploading playlists...")
 	for playlist in playlists_dict:
-		# Create playlist
-		new_playlist= sp_to.user_playlist_create(sp_to.me()['id'], playlist['name'], public= playlist['public'], collaborative= playlist['collaborative'], description= playlist['description'])
+		if playlist['track_list']:
+			# Create playlist
+			new_playlist= sp_to.user_playlist_create(sp_to.me()['id'], playlist['name'], public= playlist['public'], collaborative= playlist['collaborative'], description= playlist['description'])
 
-		# Set thumbnail
-		thumbnail_b64= base64.b64encode(requests.get(playlist['images'][0]['url']).content)
-		""" File "C:\Users\alber\Desktop\SpotifyPlaylistsMover\spotifyplaylistmover.py", line 68, in upload_to_destination
-    thumbnail_b64= base64.b64encode(requests.get(playlist['images'][0]['url']).content)
-IndexError: list index out of range """
-		sp_to.playlist_upload_cover_image(new_playlist['id'], thumbnail_b64)
+			# Set thumbnail
+			if playlist['images']:
+				thumbnail_b64= base64.b64encode(requests.get(playlist['images'][0]['url']).content)
+				try:
+					sp_to.playlist_upload_cover_image(new_playlist['id'], thumbnail_b64)
+				except:
+					print("Error uploading thumbnail of \"" + playlist['name'] + "\" playlist; skipping...")
 
-		# Set tracks
-		sp_to.playlist_add_item(new_playlist['id'], playlist['trackList'])
+			# Set tracks
+			sp_to.playlist_add_items(new_playlist['id'], playlist['track_list'])
+		else:
+			print("Playlist \"" + playlist['name'] + "\" has no tracks; skipping...")
 
 
 	# Saved tracks

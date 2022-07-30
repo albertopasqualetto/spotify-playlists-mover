@@ -4,6 +4,8 @@ This will transfer all your Spotify playlists and saved tracks to a new account
 
 **IMPORTANT: AT THIS MOMENT THE CLIENT ID IS MY ONE, IF YOU WANT TO USE THIS PROGRAM YOU HAVE TO CHANGE IT IN THE CODE WITH YOURS FOUND ON [DEVELOPER DASHBOARD](https://developer.spotify.com/dashboard) BY CREATING A NEW APPLICATION**
 
+**ONLY WORKS WITH LESS THAN 100 TRACKS PER REQUEST**
+
 ## How to use
 
 1. Download and extract or clone repo.
