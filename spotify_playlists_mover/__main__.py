@@ -1,6 +1,5 @@
-# TODO Add to pypi
 import sys
-import moving_methods
+from . import moving_methods
 import webbrowser
 import time
 

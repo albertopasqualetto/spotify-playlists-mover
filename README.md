@@ -22,7 +22,7 @@ I HAVE ALREADY SUBMITTED A PULL REQUEST TO THE PROJECT: plamere/Spotipy#840.
 5. It will let you login your destination account
 6. Done!
 
-(Otherways you can download or clone the repo, install the requirements and run by opening the folder and executing `python spotify_playlists_mover`)
+(Otherways you can download or clone the repo, install the requirements and run by opening the folder and executing `python -m spotify_playlists_mover`)
 
 ## How to get a client id
 
