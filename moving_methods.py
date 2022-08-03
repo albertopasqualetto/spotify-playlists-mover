@@ -5,7 +5,7 @@ import requests
 # from pprint import pprint
 
 CLIENT_ID= ""
-REDIRECT_URI= "http://localhost/"
+REDIRECT_URI= "http://localhost:8080"
 
 
 def download_from_origin():
