@@ -15,15 +15,14 @@ I HAVE ALREADY SUBMITTED A PULL REQUEST TO THE PROJECT: plamere/Spotipy#840.
 
 ## How to use
 
-1. Download and extract or clone repo.
-2. Run: `pip install -r requirements.txt`
-3. Open repo folder
-4. Set your client ID as environment variable: `export SPOTIPY_CLIENT_ID=<your client ID>` (see how to do it with your OS/shell) (or set it in `spotify_playlist_mover.py`)
-5. From folder run: `python .` (to run all the code in the folder, or run `python __main__.py`)
-6. The program will let you login your origin account
-7. Then it will logout from origin account
-8. It will let you login your destination account
-9. Done!
+1. Run `pip install spotify_playlist_mover`
+2. Set your client ID as environment variable: `export SPOTIPY_CLIENT_ID=<your client ID>` (see how to do it with your OS/shell) (or set it in `spotify_playlist_mover.py`)
+3. The program will let you login your origin account
+4. Then it will logout from origin account
+5. It will let you login your destination account
+6. Done!
+
+(Otherways you can download or clone the repo, install the requirements and run by opening the folder and executing `python spotify_playlists_mover`)
 
 ## How to get a client id
 
