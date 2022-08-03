@@ -1,14 +1,15 @@
+# TODO Add to pypi
 import sys
-import spotify_playlist_mover
+import moving_methods
 import webbrowser
 import time
 
 
 def main():
 	spotify_logout()
-	old_account_dl= spotify_playlist_mover.download_from_origin()
+	old_account_dl= moving_methods.download_from_origin()
 	spotify_logout()
-	spotify_playlist_mover.upload_to_destination(old_account_dl)
+	moving_methods.upload_to_destination(old_account_dl)
 	print("Done!")
 
 def spotify_logout():
